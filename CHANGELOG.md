@@ -5,6 +5,20 @@ and this project adheres to [Semantic Versioning]
 (https://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
+## [0.3.0] - 2025-09-21
+### Added
+- ESLint configuration for code quality
+- Prettier configuration for code formatting
+- JSDoc configuration for documentation generation
+- Quality check scripts in package.json
+- Automated quality checking script
+
+### Developer Experience
+- npm run lint - Check code quality
+- npm run format - Auto-format code
+- npm run docs - Generate documentation
+- npm run quality - Run all checks
+
 ## [0.2.0] - 2025-09-21
 ### Added
 - Die class with configurable sides and private fields
@@ -27,8 +41,10 @@ and this project adheres to [Semantic Versioning]
 - Changelog following Keep a Changelog format
 
 [Unreleased]: https://github.com/TJhayes22/lab3-js-oop-dice-docs-and-design/
-v0.2.0...HEAD
-[0.2.0]: https://github.com/TJhayes22/lab3-js-oop-dice-docs-anddesign/
+v0.3.0...HEAD
+[0.3.0]: https://github.com/yourusername/lab3-js-oop-dice-docs-and-design/
+releases/tag/v0.3.0
+[0.2.0]: https://github.com/TJhayes22/lab3-js-oop-dice-docs-and-design/
 releases/tag/v0.2.0
 [0.1.0]: https://github.com/TJhayes22/lab3-js-oop-dice-docs-and-
 design/releases/tag/v0.1.0

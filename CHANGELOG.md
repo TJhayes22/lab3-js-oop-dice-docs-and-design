@@ -5,6 +5,19 @@ and this project adheres to [Semantic Versioning]
 (https://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
+## [0.4.0] - 2025-09-21
+### Added
+- Command Line Interface (CLI) for dice rolling
+- TextRenderer for human-readable output
+- JsonRenderer for machine-readable output
+- DiceRoller with dependency injection
+- Multiple roll statistics
+- Comprehensive CLI help and examples
+### Architecture
+- Application layer with DiceRoller
+- Strategy pattern for rendering
+- Dependency injection for flexibility
+
 ## [0.3.0] - 2025-09-21
 ### Added
 - ESLint configuration for code quality
@@ -41,8 +54,10 @@ and this project adheres to [Semantic Versioning]
 - Changelog following Keep a Changelog format
 
 [Unreleased]: https://github.com/TJhayes22/lab3-js-oop-dice-docs-and-design/
-v0.3.0...HEAD
-[0.3.0]: https://github.com/yourusername/lab3-js-oop-dice-docs-and-design/
+v0.4.0...HEAD
+[0.4.0]: https://github.com/TJhayes22/lab3-js-oop-dice-docs-and-design/
+releases/tag/v0.4.0
+[0.3.0]: https://github.com/TJhayes22/lab3-js-oop-dice-docs-and-design/
 releases/tag/v0.3.0
 [0.2.0]: https://github.com/TJhayes22/lab3-js-oop-dice-docs-and-design/
 releases/tag/v0.2.0

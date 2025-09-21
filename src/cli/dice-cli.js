@@ -3,107 +3,108 @@ import { DiceRoller } from '../application/DiceRoller.js';
 import { TextRenderer } from '../application/TextRenderer.js';
 import { JsonRenderer } from '../application/JsonRenderer.js';
 /**
-* Command-line interface for the dice roller
-*/
+ * Command-line interface for the dice roller
+ */
 class DiceCLI {
-    #roller;
-    constructor() {
-        // Default to text renderer
-        this.#roller = new DiceRoller(new TextRenderer());
+  #roller;
+  constructor() {
+    // Default to text renderer
+    this.#roller = new DiceRoller(new TextRenderer());
+  }
+  /**
+   * Parses command line arguments and executes appropriate action
+   */
+  run() {
+    const args = process.argv.slice(2);
+    if (args.length === 0) {
+      this.showHelp();
+      return;
     }
-    /**
-    * Parses command line arguments and executes appropriate action
-    */
-    run() {
-        const args = process.argv.slice(2);
-        if (args.length === 0) {
-            this.showHelp();
-            return;
-        }
-        const command = args[0].toLowerCase();
-        switch (command) {
-            case '--help':
-            case '-h':
-                this.showHelp();
-                break;
-            case '--json':
-            case '-j':
-                // Switch to JSON renderer for next command
-                this.#roller = new DiceRoller(new JsonRenderer());
-                this.handleRoll(args.slice(1));
-                break;
-            case '--multiple':
-            case '-m':
-                this.handleMultiple(args.slice(1));
-                break;
-            case '--info':
-            case '-i':
-                this.handleInfo(args.slice(1));
-                break;
-            case '--examples':
-            case '-e':
-                this.showExamples();
-                break;
-            default:
-                // Assume it's a dice notation
-                this.handleRoll(args);
-                break;
-        }
+    const command = args[0].toLowerCase();
+    switch (command) {
+    case '--help':
+    case '-h':
+      this.showHelp();
+      break;
+    case '--json':
+    case '-j':
+      // Switch to JSON renderer for next command
+      this.#roller = new DiceRoller(new JsonRenderer());
+      this.handleRoll(args.slice(1));
+      break;
+    case '--multiple':
+    case '-m':
+      this.handleMultiple(args.slice(1));
+      break;
+    case '--info':
+    case '-i':
+      this.handleInfo(args.slice(1));
+      break;
+    case '--examples':
+    case '-e':
+      this.showExamples();
+      break;
+    default:
+      // Assume it's a dice notation
+      this.handleRoll(args);
+      break;
     }
-    /**
-    * Handles a single roll
-    * @private
-    */
-    handleRoll(args) {
-        if (args.length === 0) {
-            console.error('Error: No dice notation provided');
-            console.log('Usage: dice [notation]');
-            console.log('Example: dice 3d6+2');
-            process.exit(1);
-        }
-        const notation = args[0];
-        const result = this.#roller.roll(notation);
-        console.log(result);
+  }
+  /**
+   * Handles a single roll
+   * @private
+   */
+  handleRoll(args) {
+    if (args.length === 0) {
+      console.error('Error: No dice notation provided');
+      console.log('Usage: dice [notation]');
+      console.log('Example: dice 3d6+2');
+      process.exit(1);
     }
-    /**
-    * Handles multiple rolls
-    * @private
-    */
-    handleMultiple(args) {
-        if (args.length < 2) {
-            console.error('Error: Usage: dice --multiple [notation] [times]');
-            console.log('Example: dice --multiple 3d6 10');
-            process.exit(1);
-        }
-        const notation = args[0];
-        const times = parseInt(args[1], 10);
-        if (isNaN(times)) {
-            console.error('Error: Times must be a number');
-            process.exit(1);
-        }
-        const result = this.#roller.rollMultiple(notation, times);
-        console.log(result);
+    const notation = args[0];
+    const result = this.#roller.roll(notation);
+    console.log(result);
+  }
+  /**
+   * Handles multiple rolls
+   * @private
+   */
+  handleMultiple(args) {
+    if (args.length < 2) {
+      console.error('Error: Usage: dice --multiple [notation] [times]');
+      console.log('Example: dice --multiple 3d6 10');
+      process.exit(1);
     }
-    /**
-    * Shows info about a dice notation
-    * @private
-    */
-    handleInfo(args) {
-        if (args.length === 0) {
-            console.error('Error: No dice notation provided');
-            console.log('Usage: dice --info [notation]');
-            process.exit(1);
-        }
-        const notation = args[0];
-        const info = this.#roller.getInfo(notation);
-        console.log(info);
+    const notation = args[0];
+    const times = parseInt(args[1], 10);
+    if (isNaN(times)) {
+      console.error('Error: Times must be a number');
+      process.exit(1);
     }
-    /**
-    * Shows help information
-    * @private
-    */
-    showHelp() {
-        console.log(`
+    const result = this.#roller.rollMultiple(notation, times);
+    console.log(result);
+  }
+  /**
+   * Shows info about a dice notation
+   * @private
+   */
+  handleInfo(args) {
+    if (args.length === 0) {
+      console.error('Error: No dice notation provided');
+      console.log('Usage: dice --info [notation]');
+      process.exit(1);
+    }
+    const notation = args[0];
+    const info = this.#roller.getInfo(notation);
+    console.log(info);
+  }
+  /**
+   * Shows help information
+   * @private
+   */
+  showHelp() {
+    console.log(
+      `
 Dice Roller CLI
 ===============
 A command-line dice roller supporting standard dice notation.
@@ -126,14 +127,16 @@ Examples:
     dice --json d100 Roll a d100 with JSON output
     dice -m 4d6 6 Roll 4d6 six times
     dice -i 2d8+3 Show min/max for 2d8+3
-        `.trim());
-    }
-    /**
-    * Shows example notations
-    * @private
-    */
-    showExamples() {
-        console.log(`
+        `.trim()
+    );
+  }
+  /**
+   * Shows example notations
+   * @private
+   */
+  showExamples() {
+    console.log(
+      `
 Dice Notation Examples
 ======================
 Basic Rolls:
@@ -160,8 +163,9 @@ Common Gaming Dice:
     d12 Twelve-sided (dodecahedron)
     d20 Twenty-sided (icosahedron)
     d100 Percentile dice
-        `.trim());
-    }
+        `.trim()
+    );
+  }
 }
 // Run the CLI
 const cli = new DiceCLI();
